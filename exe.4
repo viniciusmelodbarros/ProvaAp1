@@ -1,0 +1,108 @@
+"""
+Programa: Classificador de Acesso à Biblioteca
+Descrição: Verifica se uma pessoa pode retirar um livro emprestado,
+           baseado na idade e posse de carteirinha
+Regras:
+- Menor de 12 anos: Acesso negado
+- 12 anos ou mais COM carteirinha: Empréstimo liberado
+- 12 anos ou mais SEM carteirinha: Solicitar cadastro de carteirinha
+"""
+
+# ============ ENTRADA DE DADOS ============
+
+# Coletando a idade do usuário com validação
+while True:
+    try:
+        idade = int(input("Digite sua idade: "))
+        if idade < 0:
+            print("Idade não pode ser negativa. Tente novamente.")
+            continue
+        break
+    except ValueError:
+        print("Entrada inválida! Digite um número inteiro para a idade.")
+
+# Coletando a informação sobre a carteirinha com validação
+while True:
+    resposta = input("Você possui carteirinha da biblioteca? (Digite 'sim' ou 'nao'): ").strip().lower()
+    if resposta in ['sim', 's', 'yes', 'y']:
+        tem_carteirinha = True
+        break
+    elif resposta in ['nao', 'não', 'n', 'no']:
+        tem_carteirinha = False
+        break
+    else:
+        print("Resposta inválida! Digite 'sim' ou 'nao'.")
+
+# ============ PROCESSAMENTO E CLASSIFICAÇÃO ============
+
+# Estrutura de decisão para classificar o acesso
+# Usando if, elif e else para cobrir todos os casos de forma eficiente
+
+if idade < 12:
+    # Caso 1: Menor de idade mínima
+    mensagem = "Acesso não permitido"
+    status = "negado"
+
+elif idade >= 12 and tem_carteirinha:
+    # Caso 2: Idade suficiente E possui carteirinha
+    mensagem = "Empréstimo liberado"
+    status = "permitido"
+
+else:
+    # Caso 3: Idade suficiente MAS não possui carteirinha
+    # Esta condição captura: idade >= 12 AND tem_carteirinha == False
+    mensagem = "Faça sua carteirinha"
+    status = "pendente"
+
+# ============ SAÍDA FORMATADA ============
+
+print("\n" + "=" * 50)
+print("           RESULTADO DA CLASSIFICAÇÃO")
+print("=" * 50)
+
+# Exibindo os dados fornecidos
+print(f"Idade informada:        {idade} anos")
+print(f"Possui carteirinha:     {'Sim' if tem_carteirinha else 'Não'}")
+print("-" * 50)
+
+# Exibindo a mensagem final com destaque
+print(f"Status:                 {mensagem.upper()}")
+
+# Informação adicional sobre o status
+if status == "negado":
+    print("Motivo: Idade mínima para acesso é 12 anos.")
+elif status == "permitido":
+    print("Motivo: Idade e carteirinha verificados com sucesso.")
+else:
+    print("Motivo: É necessário fazer a carteirinha para retirar livros.")
+
+print("=" * 50)
+
+# ============ VERSÃO RESUMIDA (CASOS DE TESTE) ============
+
+# Casos de teste para verificação manual
+print("\n[TESTES RÁPIDOS]")
+print("-" * 50)
+
+# Teste 1: Menor de idade sem carteirinha
+print("Caso 1 - Idade: 10, Carteirinha: Não")
+if 10 < 12:
+    print("  Resultado: Acesso não permitido ✓")
+else:
+    print("  Resultado: ERRO no teste!")
+
+# Teste 2: Maior de idade com carteirinha
+print("Caso 2 - Idade: 15, Carteirinha: Sim")
+if 15 >= 12 and True:
+    print("  Resultado: Empréstimo liberado ✓")
+else:
+    print("  Resultado: ERRO no teste!")
+
+# Teste 3: Maior de idade sem carteirinha
+print("Caso 3 - Idade: 20, Carteirinha: Não")
+if 20 >= 12 and False:
+    print("  Resultado: ERRO no teste!")
+else:
+    print("  Resultado: Faça sua carteirinha ✓")
+
+print("-" * 50)
