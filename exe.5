@@ -1,0 +1,426 @@
+"""
+EXEMPLO DE ESTRUTURAS DE SELECAO EM PYTHON
+Sistema de controle de desempenho e menu de opcoes
+COM ENTRADA DE DADOS PELO USUARIO
+"""
+
+# ============================================
+# 1. ESTRUTURA ANINHADA
+# ============================================
+
+def verificar_desempenho():
+    """
+    Verifica se o estudante atingiu os requisitos.
+    """
+    print("\n=== VERIFICACAO DE DESEMPENHO ===")
+
+    nota = float(input("Informe a nota do estudante (0 a 10): "))
+    presenca = float(input("Informe a presenca do estudante (0 a 100): "))
+
+    print(f"Nota: {nota} - Presenca: {presenca}%")
+
+    if presenca >= 80:
+        print("Presenca suficiente")
+
+        if nota >= 6.0:
+            print("RESULTADO: APTO - Nota e presenca suficientes")
+        else:
+            print(
+                f"RESULTADO: NAO APTO - "
+                f"Presenca suficiente, mas nota {nota} abaixo de 6.0"
+            )
+    else:
+        print(
+            f"RESULTADO: NAO APTO - "
+            f"Presenca {presenca}% abaixo de 80%"
+        )
+
+
+# ============================================
+# 2. ESTRUTURA ENCADEADA COM ELIF
+# ============================================
+
+def avaliar_nota():
+    """
+    Avalia a nota do estudante usando elif.
+    """
+    print("\n=== AVALIACAO DA NOTA ===")
+
+    nota = float(input("Informe a nota para avaliar (0 a 10): "))
+
+    print(f"Nota informada: {nota}")
+
+    if nota >= 8.5:
+        resultado = "OTIMO"
+    elif nota >= 6.5:
+        resultado = "SATISFATORIO"
+    elif nota >= 5.0:
+        resultado = "MEDIANO"
+    elif nota >= 2.5:
+        resultado = "BAIXO"
+    else:
+        resultado = "MUITO BAIXO"
+
+    print(f"AVALIACAO: {resultado}")
+
+
+# ============================================
+# 3. ESTRUTURA MATCH CASE
+# ============================================
+
+def executar_menu():
+    """
+    Processa opcoes utilizando match case.
+    """
+    print("\n=== EXECUTAR MENU ===")
+    print("1 - Mostrar estudantes")
+    print("2 - Inserir estudante")
+    print("3 - Verificar resultado")
+    print("4 - Encerrar sistema")
+
+    opcao = input("Informe a opcao escolhida: ")
+
+    match opcao:
+        case "1":
+            print("OPCAO 1: Mostrar estudantes")
+
+        case "2":
+            print("OPCAO 2: Inserir estudante")
+
+        case "3":
+            print("OPCAO 3: Verificar resultado")
+
+        case "4" | "encerrar":
+            print("OPCAO 4: Encerrar sistema")
+
+        case _:
+            print(f"OPCAO NAO RECONHECIDA: {opcao}")
+
+
+# ============================================
+# 4. MATCH CASE COM GUARDA
+# ============================================
+
+def verificar_estudante():
+    """
+    Verifica a situacao do estudante usando match case.
+    """
+    print("\n=== VERIFICACAO DO ESTUDANTE ===")
+
+    nome = input("Informe o nome do estudante: ")
+    nota = float(input("Informe a nota do estudante (0 a 10): "))
+    ausencias = int(input("Informe a quantidade de ausencias: "))
+
+    print(
+        f"Estudante: {nome} - "
+        f"Nota: {nota} - "
+        f"Ausencias: {ausencias}"
+    )
+
+    dados = (nota, ausencias)
+
+    match dados:
+        case (n, _) if n >= 8.5:
+            print(f"{nome}: DESEMPENHO ALTO - Nota {n}")
+
+        case (n, a) if n >= 6.5 and a <= 8:
+            print(f"{nome}: APTO - Nota {n}, Ausencias {a}")
+
+        case (n, a) if n >= 5.0 and a <= 8:
+            print(f"{nome}: EM ANALISE - Nota {n}, Ausencias {a}")
+
+        case (n, a) if n < 5.0 or a > 8:
+            print(f"{nome}: NAO APTO - Nota {n}, Ausencias {a}")
+
+        case _:
+            print(f"{nome}: RESULTADO INDEFINIDO")
+
+
+# ============================================
+# 5. FUNCAO PRINCIPAL
+# ============================================
+
+def principal():
+    """
+    Funcao principal com menu interativo.
+    """
+    print("=" * 50)
+    print("CONTROLE DE DESEMPENHO")
+    print("EXEMPLO DE ESTRUTURAS DE SELECAO")
+    print("=" * 50)
+
+    while True:
+        print("\n" + "-" * 50)
+        print("MENU INICIAL")
+        print("-" * 50)
+        print("1 - Verificar Desempenho")
+        print("2 - Avaliar Nota")
+        print("3 - Executar Menu")
+        print("4 - Verificar Estudante")
+        print("5 - Encerrar")
+
+        opcao = input("\nSelecione uma opcao (1-5): ")
+
+        if opcao == "1":
+            verificar_desempenho()
+
+        elif opcao == "2":
+            avaliar_nota()
+
+        elif opcao == "3":
+            executar_menu()
+
+        elif opcao == "4":
+            verificar_estudante()
+
+        elif opcao == "5":
+            print("\nEncerrando o programa...")
+            break
+
+        else:
+            print("\nOPCAO INVALIDA! Escolha novamente.")
+
+        input("\nAperte Enter para continuar...")
+
+
+# ============================================
+# 6. VERIFICAR VARIOS ESTUDANTES
+# ============================================
+
+def verificar_varios_estudantes():
+    """
+    Verifica varios estudantes.
+    """
+    print("\n=== VERIFICAR VARIOS ESTUDANTES ===")
+
+    continuar = "s"
+
+    while continuar.lower() == "s":
+        print("\n" + "-" * 30)
+
+        verificar_desempenho()
+
+        continuar = input(
+            "\nVerificar mais um estudante? (s/n): "
+        )
+
+
+def avaliar_varias_notas():
+    """
+    Avalia varias notas.
+    """
+    print("\n=== AVALIAR VARIAS NOTAS ===")
+
+    continuar = "s"
+
+    while continuar.lower() == "s":
+        print("\n" + "-" * 30)
+
+        avaliar_nota()
+
+        continuar = input(
+            "\nAvaliar outra nota? (s/n): "
+        )
+
+
+# ============================================
+# 7. USO COM LISTAS
+# ============================================
+
+def processar_estudantes():
+    """
+    Processa uma lista de estudantes.
+    """
+    print("\n=== PROCESSAR ESTUDANTES ===")
+
+    estudantes = []
+    continuar = "s"
+
+    while continuar.lower() == "s":
+        print("\n" + "-" * 30)
+
+        nome = input("Nome do estudante: ")
+        nota = float(input("Nota (0 a 10): "))
+        ausencias = int(input("Ausencias: "))
+
+        estudantes.append(
+            {
+                "nome": nome,
+                "nota": nota,
+                "ausencias": ausencias
+            }
+        )
+
+        continuar = input(
+            "Adicionar outro estudante? (s/n): "
+        )
+
+    if estudantes:
+        print("\n" + "-" * 30)
+        print("RESULTADOS:")
+        print("-" * 30)
+
+        for estudante in estudantes:
+
+            dados = (
+                estudante["nota"],
+                estudante["ausencias"]
+            )
+
+            match dados:
+                case (n, _) if n >= 8.5:
+                    status = (
+                        f"{estudante['nome']}: "
+                        f"DESEMPENHO ALTO - Nota {n}"
+                    )
+
+                case (n, a) if n >= 6.5 and a <= 8:
+                    status = (
+                        f"{estudante['nome']}: "
+                        f"APTO - Nota {n}, Ausencias {a}"
+                    )
+
+                case (n, a) if n >= 5.0 and a <= 8:
+                    status = (
+                        f"{estudante['nome']}: "
+                        f"EM ANALISE - Nota {n}, Ausencias {a}"
+                    )
+
+                case (n, a) if n < 5.0 or a > 8:
+                    status = (
+                        f"{estudante['nome']}: "
+                        f"NAO APTO - Nota {n}, Ausencias {a}"
+                    )
+
+                case _:
+                    status = (
+                        f"{estudante['nome']}: "
+                        f"RESULTADO INDEFINIDO"
+                    )
+
+            print(status)
+
+
+# ============================================
+# 8. MENU COMPLETO COM MATCH CASE
+# ============================================
+
+def menu_completo():
+    """
+    Menu completo utilizando match case.
+    """
+    print("=" * 50)
+    print("CONTROLE DE DESEMPENHO - MENU COMPLETO")
+    print("=" * 50)
+
+    while True:
+        print("\n" + "-" * 50)
+        print("OPCOES DISPONIVEIS:")
+        print("-" * 50)
+        print("1 - Verificar Desempenho")
+        print("2 - Avaliar Nota")
+        print("3 - Executar Menu Simples")
+        print("4 - Verificar Estudante")
+        print("5 - Verificar Varios Estudantes")
+        print("6 - Avaliar Varias Notas")
+        print("7 - Processar Estudantes")
+        print("8 - Encerrar")
+
+        opcao = input("\nSelecione uma opcao: ")
+
+        match opcao:
+            case "1":
+                verificar_desempenho()
+
+            case "2":
+                avaliar_nota()
+
+            case "3":
+                executar_menu()
+
+            case "4":
+                verificar_estudante()
+
+            case "5":
+                verificar_varios_estudantes()
+
+            case "6":
+                avaliar_varias_notas()
+
+            case "7":
+                processar_estudantes()
+
+            case "8" | "encerrar":
+                print("\nEncerrando o programa...")
+                break
+
+            case _:
+                print("\nOPCAO INVALIDA! Escolha novamente.")
+
+        if opcao not in ("8", "encerrar"):
+            input("\nAperte Enter para continuar...")
+
+
+# ============================================
+# 9. TESTE RAPIDO
+# ============================================
+
+def teste_rapido():
+    """
+    Versao simplificada para testes.
+    """
+    print("\n=== TESTE RAPIDO ===")
+    print("1 - Testar Desempenho")
+    print("2 - Testar Nota")
+    print("3 - Testar Match Case")
+    print("4 - Testar Guarda")
+
+    opcao = input("Selecione um teste (1-4): ")
+
+    if opcao == "1":
+        verificar_desempenho()
+
+    elif opcao == "2":
+        avaliar_nota()
+
+    elif opcao == "3":
+        executar_menu()
+
+    elif opcao == "4":
+        verificar_estudante()
+
+    else:
+        print("Opcao invalida!")
+
+
+# ============================================
+# PONTO DE ENTRADA
+# ============================================
+
+if __name__ == "__main__":
+
+    print("=" * 50)
+    print("CONTROLE DE DESEMPENHO - VERSOES")
+    print("=" * 50)
+
+    print("1 - Menu Interativo")
+    print("2 - Menu Completo")
+    print("3 - Teste Rapido")
+    print("4 - Encerrar")
+
+    versao = input("\nSelecione uma versao (1-4): ")
+
+    if versao == "1":
+        principal()
+
+    elif versao == "2":
+        menu_completo()
+
+    elif versao == "3":
+        teste_rapido()
+
+    elif versao == "4":
+        print("Encerrando...")
+
+    else:
+        print("Opcao invalida!")
