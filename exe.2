@@ -1,0 +1,24 @@
+
+titulo = "Cálculo no carrinho de compras"
+descricao = "Um cliente comprou três cadernos, cada um por: "
+cont = " e recebeu um desconto de: "
+pergunta = "Quanto ele gastou?"
+resposta = "Ele gastou: "
+
+preco = 12.50
+quantidade = 3
+desconto = 5.00
+
+# Calcula o valor total antes do desconto
+subtotal = preco * quantidade
+
+# Calcula o valor final, já com o desconto aplicado
+valor_final = subtotal - desconto
+
+# .2f formata os valores com 2 casas decimais
+print(f"""
+{titulo}
+{descricao}R$ {preco:.2f}{cont}R$ {desconto:.2f}
+{pergunta}
+{resposta}R$ {valor_final:.2f}
+""")
